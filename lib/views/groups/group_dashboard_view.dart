@@ -379,20 +379,22 @@ class _DashboardHeader extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 12),
+              // ... kode Avatar di atasnya ...
+              const SizedBox(width: 12),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       greeting,
-                      style: const TextStyle(fontSize: 13, color: AppTheme.muted),
+                      style: const TextStyle(fontSize: 13, color: Colors.white70),
                     ),
                     Text(
                       displayName,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w800,
-                        color: AppTheme.primary,
+                        color: Colors.white,
                         letterSpacing: -0.3,
                       ),
                       maxLines: 1,
@@ -401,6 +403,7 @@ class _DashboardHeader extends StatelessWidget {
                   ],
                 ),
               ),
+            
               if (isAdmin) ...[
                 _HeaderIconBtn(
                   icon: Icons.manage_accounts_outlined,
@@ -625,7 +628,7 @@ class _SectionHeader extends StatelessWidget {
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w800,
-            color: AppTheme.primary,
+            color: Color.fromARGB(255, 255, 255, 255),
             letterSpacing: -0.2,
           ),
         ),

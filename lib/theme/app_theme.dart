@@ -2,25 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AppTheme {
-  // Palette: Clean slate with one warm accent
-  static const Color _primary = Color(0xFF1A1A2E);      // deep navy
-  static const Color _accent = Color(0xFF4F8EF7);       // clear blue
-  static const Color _surface = Color(0xFFFFFFFF);
-  static const Color _bg = Color(0xFFF5F6FA);
-  static const Color _muted = Color(0xFF8E8FA8);
-  static const Color _border = Color(0xFFE8E9F3);
+  // Palette: Deep Purple & Vibrant Orange
+  static const Color _bg = Color(0xFF3D243D);        
+  static const Color _primary = Color(0xFF3D243D);   
+  static const Color _accent = Color(0xFFFF8C00);    
+  static const Color _surface = Color(0xFFFFFFFF);   
+  static const Color _muted = Color(0xFF8E8FA8);     
+  static const Color _border = Color(0xFFE0E0E0);    
+
+  // Constants untuk dipanggil di view
+  static const Color bg = _bg;
+  static const Color primary = _primary;
+  static const Color accent = _accent;
+  static const Color surface = _surface;
+  static const Color muted = _muted;
+  static const Color border = _border;
 
   static ThemeData light() {
     const scheme = ColorScheme(
       brightness: Brightness.light,
-      primary: _accent,
+      primary: _accent, 
       onPrimary: Colors.white,
-      primaryContainer: Color(0xFFE8F0FE),
-      onPrimaryContainer: Color(0xFF1A5FB4),
-      secondary: Color(0xFF6C63FF),
+      primaryContainer: Color(0xFFFFE0B2), 
+      onPrimaryContainer: Color(0xFFE65100),
+      secondary: _accent,
       onSecondary: Colors.white,
-      secondaryContainer: Color(0xFFEEEDFF),
-      onSecondaryContainer: Color(0xFF3730A3),
+      secondaryContainer: Color(0xFFFFE0B2),
+      onSecondaryContainer: Color(0xFFE65100),
       tertiary: Color(0xFF10B981),
       onTertiary: Colors.white,
       tertiaryContainer: Color(0xFFD1FAE5),
@@ -30,34 +38,34 @@ class AppTheme {
       errorContainer: Color(0xFFFEE2E2),
       onErrorContainer: Color(0xFF991B1B),
       surface: _surface,
-      onSurface: _primary,
-      surfaceContainerHighest: Color(0xFFEEEFF8),
+      onSurface: Color(0xFF1A1A1A), 
+      surfaceContainerHighest: Color(0xFFF5F5F5),
       onSurfaceVariant: _muted,
       outline: _border,
       outlineVariant: Color(0xFFD1D2E6),
       inverseSurface: _primary,
-      onInverseSurface: Colors.white,
+      onInverseSurface: Colors.white, 
       inversePrimary: _accent,
     );
 
     return ThemeData(
       useMaterial3: true,
       colorScheme: scheme,
-      scaffoldBackgroundColor: _bg,
+      scaffoldBackgroundColor: _bg, 
       fontFamily: 'Inter',
 
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
         scrolledUnderElevation: 0,
-        foregroundColor: _primary,
+        foregroundColor: Colors.white,
         centerTitle: false,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark,
+          statusBarIconBrightness: Brightness.light, 
         ),
         titleTextStyle: TextStyle(
-          color: _primary,
+          color: Colors.white, 
           fontSize: 20,
           fontWeight: FontWeight.w800,
           letterSpacing: -0.5,
@@ -77,26 +85,23 @@ class AppTheme {
 
       listTileTheme: ListTileThemeData(
         iconColor: _muted,
-        textColor: _primary,
+        textColor: const Color(0xFF1A1A1A), 
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       ),
 
       chipTheme: ChipThemeData(
         shape: const StadiumBorder(),
-        backgroundColor: _bg,
-        selectedColor: const Color(0xFFE8F0FE),
-        labelStyle: const TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 13,
-        ),
+        backgroundColor: _surface,
+        selectedColor: const Color(0xFFFFE0B2),
+        labelStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
         side: const BorderSide(color: _border),
         padding: const EdgeInsets.symmetric(horizontal: 4),
       ),
 
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: _bg,
+        fillColor: const Color(0xFFF9F9F9),
         labelStyle: const TextStyle(color: _muted, fontSize: 14),
         hintStyle: const TextStyle(color: _muted),
         border: OutlineInputBorder(
@@ -185,19 +190,11 @@ class AppTheme {
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         titleTextStyle: const TextStyle(
-          color: _primary,
+          color: Color(0xFF1A1A1A),
           fontSize: 17,
           fontWeight: FontWeight.w800,
         ),
       ),
     );
   }
-
-  // Color constants for direct use
-  static const Color primary = _primary;
-  static const Color accent = _accent;
-  static const Color bg = _bg;
-  static const Color muted = _muted;
-  static const Color border = _border;
-  static const Color surface = _surface;
 }

@@ -5,6 +5,7 @@ import '../../models/app_user.dart';
 import '../../viewmodels/auth_viewmodel.dart';
 import '../../viewmodels/user_viewmodel.dart';
 import 'create_user_sheet.dart';
+import '../../theme/app_theme.dart'; // Tambahkan import theme
 
 class ManageUsersView extends StatefulWidget {
   const ManageUsersView({super.key});
@@ -28,35 +29,58 @@ class _ManageUsersViewState extends State<ManageUsersView> {
     final currentUser = context.watch<AuthViewModel>().currentUser;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Kelola Pengguna')),
+      backgroundColor: AppTheme.bg, // Pastikan background konsisten
+      appBar: AppBar(
+        title: const Text('Kelola Pengguna', style: TextStyle(color: Colors.white)),
+        iconTheme: const IconThemeData(color: Colors.white), // Ubah warna panah back
+        backgroundColor: Colors.transparent,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: userViewModel.users.isEmpty
             ? const Center(
-                child: Text('Belum ada pengguna lain yang terdaftar.'),
+                child: Text(
+                  'Belum ada pengguna lain yang terdaftar.',
+                  style: TextStyle(color: Colors.white70),
+                ),
               )
             : ListView.separated(
                 itemCount: userViewModel.users.length,
-                separatorBuilder: (_, _) => const Divider(height: 1),
+                separatorBuilder: (_, _) => const Divider(height: 1, color: AppTheme.border),
                 itemBuilder: (context, index) {
                   final user = userViewModel.users[index];
                   final isSelf = currentUser?.uid == user.uid;
                   return ListTile(
                     leading: CircleAvatar(
+                      backgroundColor: AppTheme.surface, // Ubah background avatar
+                      foregroundColor: AppTheme.primary, // Ubah warna teks dalam avatar
                       child: Text(
                         user.displayName.trim().isNotEmpty
                             ? user.displayName.trim().characters.first
                             : '?',
                       ),
                     ),
-                    title: Text(user.displayName),
-                    subtitle: Text(user.email),
+                    title: Text(
+                      user.displayName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white, // <--- NAMA JADI PUTIH
+                      ),
+                    ),
+                    subtitle: Text(
+                      user.email,
+                      style: const TextStyle(
+                        color: Colors.white70, // <--- EMAIL JADI PUTIH TRANSPARAN
+                      ),
+                    ),
                     trailing: isSelf
                         ? Chip(
+                            backgroundColor: AppTheme.surface,
                             label: Text(
                               user.role.toUpperCase(),
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
+                                color: AppTheme.primary, // Teks chip
                               ),
                             ),
                           )
@@ -65,6 +89,7 @@ class _ManageUsersViewState extends State<ManageUsersView> {
                             children: [
                               _RoleDropdown(user: user),
                               PopupMenuButton<String>(
+                                icon: const Icon(Icons.more_horiz, color: Colors.white), // <--- IKON TITIK TIGA JADI PUTIH
                                 onSelected: (value) {
                                   if (value == 'edit') {
                                     _showEditNameDialog(context, user);
@@ -105,6 +130,7 @@ class _ManageUsersViewState extends State<ManageUsersView> {
     );
   }
 
+  // ... (Dialog functions tetap sama)
   Future<void> _showEditNameDialog(BuildContext context, AppUser user) async {
     final controller = TextEditingController(text: user.displayName);
     return showDialog(
@@ -212,6 +238,9 @@ class _RoleDropdownState extends State<_RoleDropdown> {
           )
         : DropdownButton<String>(
             value: _selectedRole,
+            dropdownColor: AppTheme.bg, // <--- BACKGROUND DROPDOWN JADI GELAP
+            iconEnabledColor: Colors.white, // <--- IKON PANAH DROPDOWN JADI PUTIH
+            underline: const SizedBox(), // Menghilangkan garis bawah agar lebih bersih
             onChanged: (value) async {
               if (value == null || value == _selectedRole) return;
               setState(() => _updating = true);
@@ -226,8 +255,14 @@ class _RoleDropdownState extends State<_RoleDropdown> {
               }
             },
             items: const [
-              DropdownMenuItem(value: 'user', child: Text('User')),
-              DropdownMenuItem(value: 'admin', child: Text('Admin')),
+              DropdownMenuItem(
+                value: 'user', 
+                child: Text('User', style: TextStyle(color: Colors.white)), // <--- TEKS DROPDOWN JADI PUTIH
+              ),
+              DropdownMenuItem(
+                value: 'admin', 
+                child: Text('Admin', style: TextStyle(color: Colors.white)),
+              ),
             ],
           );
   }

@@ -46,7 +46,7 @@ class AuthFlowView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.w900,
-                    color: AppTheme.primary,
+                    color: Color.fromARGB(255, 250, 250, 250),
                     letterSpacing: -1,
                     height: 1,
                   ),
